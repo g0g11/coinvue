@@ -1,5 +1,14 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const cookieSession = require('cookie-session');
+const passport = require('passport');
+const bodyParser = require('body-parser');
+
+// mongoose models
+require('./models/User');
+
+// authentication services
+require('./services/passport');
 
 // load keys for DEV or PROD environment
 require('dotenv').config();
@@ -9,11 +18,26 @@ const keys = require('./config/keys');
 mongoose.Promise = global.Promise;
 mongoose.connect(keys.mongoURI);
 
-// initiate app
+// initialize express app
 const app = express();
 
-// all backend routes
-// .....
+// Middleware
+app.use(bodyParser.json());
+
+// set cookie settings
+app.use(
+  cookieSession({
+    maxAge: 30 * 24 * 60 * 60 * 1000,
+    keys: [keys.cookieKey],
+  })
+);
+
+// authentication provider
+app.use(passport.initialize());
+app.use(passport.session());
+
+// Authentication Routes
+require('./routes/routes')(app);
 
 // client public folder
 if (process.env.NODE_ENV === 'production') {

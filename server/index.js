@@ -6,9 +6,13 @@ const bodyParser = require('body-parser');
 
 // mongoose models
 require('./models/User');
+require('./models/Coins');
 
 // authentication services
 require('./services/passport');
+
+// CronJobs
+require('./services/cronjobs');
 
 // load keys for DEV or PROD environment
 require('dotenv').config();

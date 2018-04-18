@@ -1,6 +1,7 @@
 const authGoogleController = require('../controllers/auth.google.controller');
 const authGeneralController = require('../controllers/auth.general.controller');
 const coinCryptoCompareController = require('../controllers/coin.cryptocompare.controller');
+const coinController = require('../controllers/coin.controller');
 
 const passport = require('passport');
 
@@ -21,4 +22,7 @@ module.exports = (app) => {
   // cron for fetching all crypto currencies
   app.get('/api/cron/coin/all', coinCryptoCompareController.fetchAll);
   app.get('/api/cron/coin/prices', coinCryptoCompareController.fetchPrices);
+
+  // fetch all coins from own database
+  app.get('/api/public/coin/all', coinController.listAll);
 };

@@ -9,9 +9,10 @@ const coinSchema = new Schema({
   shortName: String,
   fullName: String,
   totalCoinSupply: String,
-  priceUSD: Number,
-  priceCHF: Number,
-  priceEUR: Number,
+  priceUSD: { type: Number, default: 0 },
+  priceCHF: { type: Number, default: 0 },
+  priceEUR: { type: Number, default: 0 },
+  ignore: { type: Boolean, default: false },
 });
 
 mongoose.model('coins', coinSchema);

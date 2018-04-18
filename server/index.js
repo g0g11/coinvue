@@ -6,7 +6,8 @@ const bodyParser = require('body-parser');
 
 // mongoose models
 require('./models/User');
-require('./models/Coins');
+require('./models/Coin');
+require('./models/Wallet');
 
 // authentication services
 require('./services/passport');

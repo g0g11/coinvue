@@ -1,13 +1,14 @@
-const express = require('express');
+const express = require('express'),
+  morgan = require('morgan');
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 
 // mongoose models
-require('./models/User');
 require('./models/Coin');
-require('./models/Wallet');
+require('./models/User');
+require('./models/Exchange');
 
 // authentication services
 require('./services/passport');
@@ -36,6 +37,19 @@ app.use(
     keys: [keys.cookieKey],
   })
 );
+
+// Express Logger Middleware
+app.use(morgan('dev', {
+  skip: function (req, res) {
+    return res.statusCode < 400
+  }, stream: process.stderr
+}));
+
+app.use(morgan('dev', {
+  skip: function (req, res) {
+    return res.statusCode >= 400
+  }, stream: process.stdout
+}));
 
 // authentication provider
 app.use(passport.initialize());

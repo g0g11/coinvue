@@ -4,7 +4,13 @@ const { Schema } = mongoose;
 // TODO: not in use currently
 const exchangeSchema = new Schema({
   name: String,
-  url: String,
+
+  // TODO: add available currencies
+  // _availableCurrencies: [
+  //   {
+  //     currency: { type: Schema.Types.ObjectId, ref: 'coins' },
+  //   },
+  // ],
 });
 
 mongoose.model('exchanges', exchangeSchema);

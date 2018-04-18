@@ -24,6 +24,9 @@ module.exports = (app) => {
   app.get('/api/cron/currency/all', coinCryptoCompareController.fetchAll);
   app.get('/api/cron/currency/prices', coinCryptoCompareController.fetchPrices);
 
+  // cron for fetching all exchanges
+  app.get('/api/cron/exchanges/all', coinCryptoCompareController.exchangeList);
+
   // fetch all coins from own database
   app.get('/api/currency/all', coinController.listAll);
 

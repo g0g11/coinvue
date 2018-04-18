@@ -7,6 +7,7 @@ const cc = require('cryptocompare');
 
 // coin model
 const Coin = mongoose.model('coins');
+const Exchange = mongoose.model('exchanges');
 
 // fetch coins from CryptoCompare (used in CronJob)
 module.exports.fetchAll = async (req, res) => {
@@ -50,7 +51,7 @@ module.exports.fetchPrices = async (req, res) => {
       try {
         const price = await cc.priceMulti(coin, ['USD', 'EUR', 'CHF']);
         _.mapKeys(price, async (value, key) => {
-          const newPrices = await Coin.findOneAndUpdate({ shortName: key }, { $set: { 'priceUSD': value.USD, 'priceEUR': value.EUR, 'priceCHF': value.CHF } });
+          const newPrices = await Coin.findOneAndUpdate({ shortName: key }, { $set: { priceUSD: value.USD, priceEUR: value.EUR, priceCHF: value.CHF } });
           return newPrices;
         });
       } catch (err) {
@@ -59,6 +60,26 @@ module.exports.fetchPrices = async (req, res) => {
     });
 
     res.send(coins);
+    res.status(200);
+  } catch (err) {
+    console.error(err);
+    res.status(400);
+  }
+};
+
+module.exports.exchangeList = async (req, res) => {
+  try {
+    const exchanges = await cc.exchangeList();
+
+    _.forEach(Object.keys(exchanges), async (name) => {
+      const existingExch = await Exchange.findOne({ name });
+      if (!existingExch) {
+        await new Exchange({
+          name,
+        }).save();
+      }
+    });
+    res.send(exchanges);
     res.status(200);
   } catch (err) {
     console.error(err);

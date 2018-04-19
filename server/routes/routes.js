@@ -2,6 +2,7 @@ const authGoogleController = require('../controllers/auth.google.controller');
 const authGeneralController = require('../controllers/auth.general.controller');
 const coinCryptoCompareController = require('../controllers/coin.cryptocompare.controller');
 const coinController = require('../controllers/coin.controller');
+const coinCcxtController = require('../controllers/coin.ccxt.controller');
 
 const passport = require('passport');
 
@@ -23,6 +24,7 @@ module.exports = (app) => {
   // cron for fetching all crypto currencies
   app.get('/api/cron/currency/all', coinCryptoCompareController.fetchAll);
   app.get('/api/cron/currency/prices', coinCryptoCompareController.fetchPrices);
+  // app.get('/api/')
 
   // cron for fetching all exchanges
   app.get('/api/cron/exchanges/all', coinCryptoCompareController.exchangeList);
@@ -36,6 +38,12 @@ module.exports = (app) => {
   // add new coins to portfolio
   app.post('/api/wallet/add', coinController.addCoin);
 
+  // add api key of exchange or wallet
+  app.post('/api/wallet/api', coinController.addApi);
+
   // delete coin from portfolio
   app.delete('/api/wallet/remove', coinController.deleteCoin);
+
+  // add exchange / wallets to fetch automatically
+  app.get('/api/wallet/getBalance', coinCcxtController.getBalance);
 };

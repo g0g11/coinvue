@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 import NavigationBar from './NavigationBar';
+import Dashboard from './Dashboard';
+import CoinOverview from './CoinOverview';
 
 class App extends Component {
   componentDidMount() {
@@ -13,7 +15,11 @@ class App extends Component {
   render() {
     return (
       <BrowserRouter>
+        <div>
         <NavigationBar />
+          <Route path='/dashboard' component={ Dashboard } />
+          <Route exact path='/overview' component={ CoinOverview } />
+        </div>
       </BrowserRouter>
     );
   }

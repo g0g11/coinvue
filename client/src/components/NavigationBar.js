@@ -26,7 +26,8 @@ class NavigationBar extends Component {
 
         const trigger = (
           <span>
-            <Image avatar src={ this.props.auth.picture } /> { this.props.auth.firstName }
+            <Image avatar src={ this.props.auth.picture } />
+            { this.props.auth.firstName }
           </span>
         );
 
@@ -42,13 +43,13 @@ class NavigationBar extends Component {
     return (
       <Menu fixed='top' animation='uncover' inverted>
         <Container>
-          <Menu.Item as='a' header>
+          <Menu.Item header>
             <Link to={ this.props.auth ? '/dashboard' : '/login' }>
               <Image size='small' src={ logo } style={{ marginRight: '1.5em' }} />
             </Link>
           </Menu.Item>
-          <Menu.Item as='a'>Dashboard</Menu.Item>
-          <Menu.Item as='a'>Coin overview</Menu.Item>
+          <Menu.Item as={ Link } to='/dashboard'>Dashboard</Menu.Item>
+          <Menu.Item as={ Link } to='/overview'>Coin overview</Menu.Item>
           <Menu.Item position='right'>
             { this.renderContent() }
           </Menu.Item>

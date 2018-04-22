@@ -6,6 +6,7 @@ import reduxThunk from 'redux-thunk';
 
 import './style/main.css';
 import 'semantic-ui-css/semantic.min.css';
+
 import App from './components/App';
 import reducers from './reducers';
 // import registerServiceWorker from './registerServiceWorker';

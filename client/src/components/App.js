@@ -6,6 +6,8 @@ import * as actions from '../actions';
 import NavigationBar from './NavigationBar';
 import Dashboard from './Dashboard';
 import CoinOverview from './CoinOverview';
+import ExchangeOverview from './ExchangeOverview';
+import NewApiForm from './portfolio/NewApiForm';
 
 class App extends Component {
   componentDidMount() {
@@ -17,8 +19,10 @@ class App extends Component {
       <BrowserRouter>
         <div>
         <NavigationBar />
-          <Route path='/dashboard' component={ Dashboard } />
+          <Route exact path='/dashboard' component={ Dashboard } />
           <Route exact path='/overview' component={ CoinOverview } />
+          <Route exact path='/exchanges' component={ ExchangeOverview } />
+          <Route path='/add-api' component={ NewApiForm } />
         </div>
       </BrowserRouter>
     );

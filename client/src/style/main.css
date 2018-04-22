@@ -1,7 +1,19 @@
 .content {
-  padding: 12em 0em;
+  padding: 10em 0em;
 }
 
-.profile-pic {
-  width: 50px;
+.cards-overview {
+  margin-bottom: 2em!important;
+}
+
+.search {
+  margin: 1.5em 0em;
+}
+
+.rw-dropdown-list {
+  margin-bottom: 2em!important;
+}
+
+.rw-input-reset {
+  border: none!important;
 }

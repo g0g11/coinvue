@@ -41,7 +41,7 @@ class NavigationBar extends Component {
 
   render() {
     return (
-      <Menu fixed='top' animation='uncover' inverted>
+      <Menu className='navbar' fixed='top' animation='uncover' inverted>
         <Container>
           <Menu.Item header>
             <Link to={ this.props.auth ? '/dashboard' : '/login' }>
@@ -50,6 +50,7 @@ class NavigationBar extends Component {
           </Menu.Item>
           <Menu.Item as={ Link } to='/dashboard'>Dashboard</Menu.Item>
           <Menu.Item as={ Link } to='/overview'>Coin overview</Menu.Item>
+          <Menu.Item as={ Link } to='/exchanges'>Exchanges</Menu.Item>
           <Menu.Item position='right'>
             { this.renderContent() }
           </Menu.Item>

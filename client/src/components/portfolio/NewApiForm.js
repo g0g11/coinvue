@@ -8,12 +8,19 @@ import { submitNewApi, fetchExchanges } from '../../actions';
 
 import formFieldsApi from './formFieldsApi';
 import NewApiFormFields from './NewApiFormFields';
+import ModalDialog from '../modals/ModalDialog';
 import 'react-widgets/dist/css/react-widgets.css';
 
 class NewApiForm extends Component {
   constructor(props) {
     super(props);
     this.props.fetchExchanges();
+  };
+
+  handleOpen = name => () => {
+    this.props.show(name, { title: 'API successful',
+      message: 'API successful added to your Portfolio.',
+    });
   };
 
   renderFields() {
@@ -49,7 +56,6 @@ class NewApiForm extends Component {
   }
 
   render() {
-    console.log(this.props);
     const { handleSubmit } = this.props;
     return (
       <Container className='content'>
@@ -62,8 +68,9 @@ class NewApiForm extends Component {
             textField="name"
           />
           { this.renderFields() }
-          <Button type='submit'>Save</Button>
+          <Button type='submit' onClick={this.handleOpen('modal')}>Save</Button>
         </Form>
+        <ModalDialog />
       </Container>
     );
   }

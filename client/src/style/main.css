@@ -17,3 +17,7 @@
 .rw-input-reset {
   border: none!important;
 }
+
+.ui.page.modals.transition.visible {
+  display: flex !important;
+}

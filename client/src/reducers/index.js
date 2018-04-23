@@ -4,6 +4,7 @@ import authReducer from './authReducer';
 import portfolioReducer from './portfolioReducer';
 import currencyReducer from './currencyReducer';
 import exchangeReducer from './exchangeReducer';
+import { reducer as modal } from 'redux-modal';
 
 export default combineReducers({
   auth: authReducer,
@@ -11,4 +12,5 @@ export default combineReducers({
   currencies: currencyReducer,
   exchanges: exchangeReducer,
   form: reduxForm,
+  modal,
 });

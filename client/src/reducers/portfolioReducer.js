@@ -1,4 +1,4 @@
-import { FETCH_PORTFOLIO, RECEIVE_PORTFOLIO } from '../actions/types';
+import { DELETE_CURRENCY, FETCH_PORTFOLIO, RECEIVE_PORTFOLIO } from '../actions/types';
 
 export default function(state = {
   isFetching: false,
@@ -16,7 +16,13 @@ export default function(state = {
         isFetching: false,
         portfolio: action.payload,
       });
+    case DELETE_CURRENCY:
+      return {
+        ...state,
+        portfolio: state.portfolio.filter(currency => currency._id !== action.payload),
+      };
     default:
+      console.log('default');
       return state;
   }
 }

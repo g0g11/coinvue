@@ -1,15 +1,23 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPortfolio } from '../../actions';
-import { Table, Image, Dimmer, Loader } from 'semantic-ui-react';
+import { Table, Image, Dimmer, Loader, Icon, Button } from 'semantic-ui-react';
+import { deleteCurrency } from '../../actions';
 
 class PortfolioList extends Component {
   componentDidMount() {
     this.props.fetchPortfolio();
   }
 
+  deleteCoin(id) {
+    console.log(this);
+    this.props.deleteCurrency(id);
+    // this.props.deleteCurrency(coinId, amount, exchangeId);
+  }
+
   renderPortfolio() {
     return this.props.portfolio.portfolio.map(portfolio => {
+      console.log(portfolio);
       return (
         <Table.Row key={ portfolio.currency._id }>
           <Table.Cell>
@@ -20,6 +28,10 @@ class PortfolioList extends Component {
           <Table.Cell>{ portfolio.currency.priceEUR } EUR</Table.Cell>
           <Table.Cell>{ portfolio.amount }</Table.Cell>
           <Table.Cell positive>{ portfolio.amount * portfolio.currency.priceEUR } EUR</Table.Cell>
+          <Table.Cell>{ portfolio.exchange.name }</Table.Cell>
+          <Table.Cell><Icon link
+            onClick={ this.deleteCoin.bind(this, portfolio._id) }
+            name='delete' /></Table.Cell>
         </Table.Row>
       );
     });
@@ -41,6 +53,8 @@ class PortfolioList extends Component {
               <Table.HeaderCell>Market Price</Table.HeaderCell>
               <Table.HeaderCell>Amount</Table.HeaderCell>
               <Table.HeaderCell>Total</Table.HeaderCell>
+              <Table.HeaderCell>Exchange</Table.HeaderCell>
+              <Table.HeaderCell>Delete</Table.HeaderCell>
             </Table.Row>
           </Table.Header>
           <Table.Body>{ this.renderPortfolio() }</Table.Body>
@@ -61,4 +75,4 @@ function mapStateToProps(state) {
   return { portfolio, isFetching, isEmpty };
 }
 
-export default connect(mapStateToProps, { fetchPortfolio })(PortfolioList);
+export default connect(mapStateToProps, { fetchPortfolio, deleteCurrency })(PortfolioList);

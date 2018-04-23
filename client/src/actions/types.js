@@ -5,3 +5,4 @@ export const FETCH_CURRENCIES = 'fetch_currencies';
 export const RECEIVE_CURRENCIES = 'receive_currencies';
 export const FETCH_EXCHANGES = 'fetch_exchanges';
 export const RECEIVE_EXCHANGES = 'receive_exchanges';
+export const DELETE_CURRENCY = 'delete_currency';

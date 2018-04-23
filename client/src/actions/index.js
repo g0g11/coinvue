@@ -1,9 +1,11 @@
 import axios from 'axios';
+
 import { FETCH_CURRENCIES,
   FETCH_PORTFOLIO,
   FETCH_USER,
   FETCH_EXCHANGES,
   RECEIVE_CURRENCIES,
+  DELETE_CURRENCY,
   RECEIVE_PORTFOLIO,
   RECEIVE_EXCHANGES,
 } from './types';
@@ -34,18 +36,31 @@ export const fetchCurrencies = () => dispatch => {
     }));
 };
 
+export const deleteCurrency = (id) => dispatch => {
+  console.log('action');
+  axios.delete(`/api/wallet/remove/${id}`)
+    .then(res => dispatch({
+      type: DELETE_CURRENCY,
+      payload: id,
+    }));
+};
+
 export const fetchExchanges = () => dispatch => {
   dispatch({ type: FETCH_EXCHANGES });
-  console.log('action');
   return axios.get('/api/exchanges/all')
     .then(res => dispatch({
       type: RECEIVE_EXCHANGES,
       payload: res.data,
     }));
-}
+};
 
 export const submitNewApi = (values) => async dispatch => {
-  console.log(values);
   const res = await axios.post('/api/wallet/api', values);
   dispatch({ type: FETCH_PORTFOLIO, payload: res.data });
 };
+
+export const submitNewCurrency = (values) => async dispatch => {
+  const res = await axios.post('/api/wallet/add', values);
+  dispatch({ type: FETCH_PORTFOLIO, payload: res.data });
+};
+

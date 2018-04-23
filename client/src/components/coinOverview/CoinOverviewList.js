@@ -8,6 +8,19 @@ class CoinOverviewList extends Component {
     this.props.fetchCurrencies();
   }
 
+  renderImage(currency) {
+    if (!currency.imageUrl) return null;
+    try {
+      return (
+        <Image avatar
+               src={ require(`../../resources${currency.imageUrl}`) }
+        />
+      );
+    } catch (err) {
+      return null;
+    }
+  }
+
   // TODO: Handle errors with Images
   // TODO: Display Statistics
   renderCurrencies() {
@@ -15,8 +28,7 @@ class CoinOverviewList extends Component {
       return (
         <Table.Row key={ currency._id }>
           <Table.Cell>
-            <Image avatar
-                   src={ `https://www.cryptocompare.com${currency.imageUrl}` } />
+            {this.renderImage(currency)}
           </Table.Cell>
           <Table.Cell>{ currency.fullName } ({ currency.shortName })</Table.Cell>
           <Table.Cell>{ currency.priceEUR } EUR</Table.Cell>

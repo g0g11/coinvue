@@ -21,3 +21,7 @@
 .ui.page.modals.transition.visible {
   display: flex !important;
 }
+
+.results {
+  width: 100%!important;
+}

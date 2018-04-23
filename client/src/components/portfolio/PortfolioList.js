@@ -5,24 +5,37 @@ import { Table, Image, Dimmer, Loader, Icon, Button } from 'semantic-ui-react';
 import { deleteCurrency } from '../../actions';
 
 class PortfolioList extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state
+  // }
   componentDidMount() {
     this.props.fetchPortfolio();
   }
 
+  renderImage(portfolio) {
+    if (!portfolio.currency.imageUrl) return null;
+    try {
+      return (
+        <Image avatar
+               src={ require(`../../resources${portfolio.currency.imageUrl}`) }
+        />
+      );
+    } catch (err) {
+      return null;
+    }
+  }
+
   deleteCoin(id) {
-    console.log(this);
     this.props.deleteCurrency(id);
-    // this.props.deleteCurrency(coinId, amount, exchangeId);
   }
 
   renderPortfolio() {
     return this.props.portfolio.portfolio.map(portfolio => {
-      console.log(portfolio);
       return (
         <Table.Row key={ portfolio.currency._id }>
           <Table.Cell>
-            <Image avatar
-                   src={ `https://www.cryptocompare.com/${portfolio.currency.imageUrl}` } />
+            { this.renderImage(portfolio) }
           </Table.Cell>
           <Table.Cell>{ portfolio.currency.fullName } ({ portfolio.currency.shortName })</Table.Cell>
           <Table.Cell>{ portfolio.currency.priceEUR } EUR</Table.Cell>

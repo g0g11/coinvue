@@ -2,6 +2,7 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { Button, Form, Container } from 'semantic-ui-react';
 import { connect } from 'react-redux';
+import { show } from 'redux-modal';
 import { reduxForm, Field } from 'redux-form';
 import { DropdownList } from 'react-widgets';
 import { submitNewApi, fetchExchanges } from '../../actions';
@@ -55,6 +56,10 @@ class NewApiForm extends Component {
     );
   }
 
+  redirect = () => {
+    this.props.history.push('/dashboard');
+  };
+
   render() {
     const { handleSubmit } = this.props;
     return (
@@ -69,8 +74,8 @@ class NewApiForm extends Component {
           />
           { this.renderFields() }
           <Button type='submit' onClick={this.handleOpen('modal')}>Save</Button>
+          <ModalDialog onHide={this.redirect} />
         </Form>
-        <ModalDialog />
       </Container>
     );
   }
@@ -84,5 +89,5 @@ function mapStateToProps(state) {
 export default reduxForm({
   form: 'apiForm',
 })(
-  connect(mapStateToProps, { submitNewApi, fetchExchanges })(NewApiForm)
+  connect(mapStateToProps, { submitNewApi, fetchExchanges, show })(NewApiForm)
 );

@@ -22,7 +22,6 @@ export default function(state = {
         portfolio: state.portfolio.filter(currency => currency._id !== action.payload),
       };
     default:
-      console.log('default');
       return state;
   }
 }

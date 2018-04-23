@@ -13,9 +13,11 @@ class ModalDialog extends Component {
     handleHide: PropTypes.func.isRequired,
   };
 
-  handleClose(values) {
-    console.log(this);
-  }
+  handleClose = (values) => {
+    if (this.props.onHide) {
+      this.props.onHide();
+    }
+  };
 
   render() {
     const { show, handleHide, message, title } = this.props;
@@ -32,7 +34,7 @@ class ModalDialog extends Component {
           <Button
             positive
             icon='checkmark'
-            onClick={ handleHide }
+            onClick={ this.handleClose }
             labelPosition='right'
             content='Great!'
           />

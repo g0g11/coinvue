@@ -99,7 +99,7 @@ class NewCurrencyForm extends Component {
           />
           { this.renderFields() }
           <Button type='submit' onClick={this.handleOpen('modal')}>Save</Button>
-        <ModalDialog />
+          <ModalDialog />
         </Form>
       </Container>
     );

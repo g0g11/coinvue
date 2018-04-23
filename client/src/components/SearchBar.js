@@ -1,14 +1,36 @@
-import _ from 'lodash';
 import React, { Component } from 'react';
-import { Search } from 'semantic-ui-react';
+import { connect } from 'react-redux';
+import { Input } from 'semantic-ui-react';
+import { searchPortfolio, searchCurrency } from '../actions';
 
 class SearchBar extends Component {
-  // TODO: Implement Search feature
+  handleSearch = (e) => {
+    this.props.onSearch(e);
+  };
+
   render() {
+    const { value } = this.props;
+
     return (
-      <Search input={{ fluid: true }}>Empty</Search>
+      <div>
+        <Input
+          className="search-field"
+          placeholder = "Search"
+          onChange={ (e) => this.handleSearch(e.target.value) }
+          icon='search'
+          value={ value } />
+      </div>
     );
   }
 }
 
-export default SearchBar;
+function mapStateToProps({ coins }) {
+  return {
+    value: coins,
+  };
+}
+
+export default connect(mapStateToProps, {
+  searchPortfolio,
+  searchCurrency,
+})(SearchBar);

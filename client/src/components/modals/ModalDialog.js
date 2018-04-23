@@ -4,16 +4,12 @@ import { Button, Modal } from 'semantic-ui-react';
 import { connectModal } from 'redux-modal';
 
 class ModalDialog extends Component {
-  constructor(props) {
-    super(props);
-  };
-
   static propTypes = {
     message: PropTypes.string.isRequired,
     handleHide: PropTypes.func.isRequired,
   };
 
-  handleClose = (values) => {
+  handleClose = () => {
     if (this.props.onHide) {
       this.props.onHide();
     }

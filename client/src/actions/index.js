@@ -8,6 +8,9 @@ import { FETCH_CURRENCIES,
   DELETE_CURRENCY,
   RECEIVE_PORTFOLIO,
   RECEIVE_EXCHANGES,
+  SEARCH_PORTFOLIO,
+  SEARCH_CURRENCY,
+  SEARCH_EXCHANGE,
 } from './types';
 
 export const fetchUser = () => async dispatch => {
@@ -37,7 +40,6 @@ export const fetchCurrencies = () => dispatch => {
 };
 
 export const deleteCurrency = (id) => dispatch => {
-  console.log('action');
   axios.delete(`/api/wallet/remove/${id}`)
     .then(res => dispatch({
       type: DELETE_CURRENCY,
@@ -64,3 +66,14 @@ export const submitNewCurrency = (values) => async dispatch => {
   dispatch({ type: FETCH_PORTFOLIO, payload: res.data });
 };
 
+export const searchPortfolio = (value) => async dispatch => {
+  dispatch({ type: SEARCH_PORTFOLIO, value });
+};
+
+export const searchCurrency = (value) => async dispatch => {
+  dispatch({ type: SEARCH_CURRENCY, value });
+};
+
+export const searchExchange = (value) => async dispatch => {
+  dispatch({ type: SEARCH_EXCHANGE, value });
+};

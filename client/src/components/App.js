@@ -5,8 +5,8 @@ import * as actions from '../actions';
 
 import NavigationBar from './NavigationBar';
 import Dashboard from './Dashboard';
-import CoinOverview from './CoinOverview';
-import ExchangeOverview from './ExchangeOverview';
+import CoinOverview from './coinOverview/CoinOverview';
+import ExchangeOverview from './exchangeOverview/ExchangeOverview';
 import NewApiForm from './portfolio/NewApiForm';
 import NewCurrencyForm from './portfolio/NewCurrencyForm';
 import ModalDialog from './modals/ModalDialog';

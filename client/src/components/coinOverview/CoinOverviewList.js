@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCurrencies } from '../../actions';
+import { fetchCurrencies, searchCurrency } from '../../actions';
 import { Table, Image, Loader, Dimmer } from 'semantic-ui-react';
+import SearchBar  from '../SearchBar';
 
 class CoinOverviewList extends Component {
   componentDidMount() {
@@ -21,10 +22,15 @@ class CoinOverviewList extends Component {
     }
   }
 
+  searchValue = (e) => {
+    this.props.searchCurrency(e);
+  };
+
   // TODO: Handle errors with Images
   // TODO: Display Statistics
   renderCurrencies() {
-    return this.props.currencies.currencies.map(currency => {
+    const { coins } = this.props;
+    return this.props.coins.map(currency => {
       return (
         <Table.Row key={ currency._id }>
           <Table.Cell>
@@ -42,6 +48,7 @@ class CoinOverviewList extends Component {
   render() {
     return (
       <div>
+        <SearchBar searchCurrency={searchCurrency} onSearch={ this.searchValue } />
         { this.props.isFetching || this.props.isEmpty ?
           <Dimmer active>
             <Loader />
@@ -66,13 +73,20 @@ class CoinOverviewList extends Component {
 }
 
 function mapStateToProps(state) {
-  const { currencies } = state;
-  const { isFetching, isEmpty } = currencies || {
+  const { currencies, coins, value } = state.currencies;
+  const { isFetching, isEmpty } = state.currencies || {
     isFetching: true,
     isEmpty: true,
     currencies: [],
+    value: '',
   };
-  return { currencies, isFetching, isEmpty };
+  return {
+    currencies,
+    isFetching,
+    isEmpty,
+    value,
+    coins,
+  };
 }
 
-export default connect(mapStateToProps, { fetchCurrencies })(CoinOverviewList);
+export default connect(mapStateToProps, { fetchCurrencies, searchCurrency })(CoinOverviewList);

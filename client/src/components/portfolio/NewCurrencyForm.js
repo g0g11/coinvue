@@ -16,7 +16,6 @@ import formFieldsCurrency from './formFieldsCurrency';
 import NewCurrencyFormFields from './NewCurrencyFormFields';
 import ModalDialog from '../modals/ModalDialog';
 import 'react-widgets/dist/css/react-widgets.css';
-import * as actions from '../../actions';
 
 class NewCurrencyForm extends Component {
   constructor(props) {
@@ -78,6 +77,10 @@ class NewCurrencyForm extends Component {
     );
   }
 
+  redirect = () => {
+    this.props.history.push('/dashboard');
+  };
+
   render() {
     const { handleSubmit } = this.props;
     return (
@@ -99,7 +102,7 @@ class NewCurrencyForm extends Component {
           />
           { this.renderFields() }
           <Button type='submit' onClick={this.handleOpen('modal')}>Save</Button>
-          <ModalDialog />
+          <ModalDialog onHide={ this.redirect } />
         </Form>
       </Container>
     );

@@ -74,7 +74,7 @@ class NewApiForm extends Component {
           />
           { this.renderFields() }
           <Button type='submit' onClick={this.handleOpen('modal')}>Save</Button>
-          <ModalDialog onHide={this.redirect} />
+          <ModalDialog onHide={ this.redirect } />
         </Form>
       </Container>
     );

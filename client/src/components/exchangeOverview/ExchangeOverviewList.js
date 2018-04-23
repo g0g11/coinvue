@@ -1,15 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchExchanges } from '../../actions';
-import { Table, Image, Loader, Dimmer } from 'semantic-ui-react';
+import { fetchExchanges, searchExchange } from '../../actions';
+import { Table, Loader, Dimmer } from 'semantic-ui-react';
+import SearchBar  from '../SearchBar';
 
 class ExchangeOverviewList extends Component {
   componentDidMount() {
     this.props.fetchExchanges();
   }
 
+  searchValue = (e) => {
+    this.props.searchExchange(e);
+  };
+
   renderExchanges() {
-    return this.props.exchanges.exchanges.map(exchange => {
+    const { coins } = this.props;
+    return this.props.coins.map(exchange => {
       return (
         <Table.Row key={ exchange._id }>
           <Table.Cell>{ exchange.name }</Table.Cell>
@@ -22,6 +28,7 @@ class ExchangeOverviewList extends Component {
   render() {
     return (
       <div>
+        <SearchBar searchExchange={ searchExchange } onSearch={ this.searchValue } />
         { this.props.isFetching || this.props.isEmpty ?
           <Dimmer active>
             <Loader />
@@ -43,13 +50,23 @@ class ExchangeOverviewList extends Component {
 }
 
 function mapStateToProps(state) {
-  const { exchanges } = state;
-  const { isFetching, isEmpty } = exchanges || {
+  const { exchanges, value, coins } = state.exchanges;
+  const { isFetching, isEmpty } = state.exchanges || {
     isFetching: true,
     isEmpty: true,
     exchanges: [],
+    value: '',
   }
-  return { exchanges, isFetching, isEmpty };
+  return {
+    exchanges,
+    isFetching,
+    isEmpty,
+    value,
+    coins,
+  };
 }
 
-export default connect(mapStateToProps, { fetchExchanges })(ExchangeOverviewList);
+export default connect(mapStateToProps, {
+  fetchExchanges,
+  searchExchange,
+})(ExchangeOverviewList);

@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPortfolio } from '../../actions';
-import { Table, Image, Dimmer, Loader, Icon, Button } from 'semantic-ui-react';
-import { deleteCurrency } from '../../actions';
+import { Table, Image, Dimmer, Loader, Icon } from 'semantic-ui-react';
+import { deleteCurrency, searchPortfolio } from '../../actions';
+import SearchBar  from '../SearchBar';
 
 class PortfolioList extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.state
-  // }
   componentDidMount() {
     this.props.fetchPortfolio();
   }
@@ -30,8 +27,14 @@ class PortfolioList extends Component {
     this.props.deleteCurrency(id);
   }
 
+  searchValue = (e) => {
+    this.props.searchPortfolio(e);
+  };
+
   renderPortfolio() {
-    return this.props.portfolio.portfolio.map(portfolio => {
+    const { coins } = this.props;
+
+    return coins.map(portfolio => {
       return (
         <Table.Row key={ portfolio.currency._id }>
           <Table.Cell>
@@ -53,6 +56,7 @@ class PortfolioList extends Component {
   render() {
     return (
       <div>
+        <SearchBar searchPortfolio={searchPortfolio} onSearch={ this.searchValue } />
         { this.props.isFetching || this.props.isEmpty ?
           <Dimmer active>
             <Loader />
@@ -79,13 +83,24 @@ class PortfolioList extends Component {
 }
 
 function mapStateToProps(state) {
-  const { portfolio } = state;
-  const { isFetching, isEmpty } = portfolio || {
+  const { portfolio, coins, value } = state.portfolio;
+  const { isFetching, isEmpty } = state.portfolio || {
     isFetching: true,
     isEmpty: true,
     portfolio: [],
+    value: '',
   };
-  return { portfolio, isFetching, isEmpty };
+  return {
+    portfolio,
+    isFetching,
+    isEmpty,
+    value,
+    coins,
+  };
 }
 
-export default connect(mapStateToProps, { fetchPortfolio, deleteCurrency })(PortfolioList);
+export default connect(mapStateToProps, {
+  fetchPortfolio,
+  deleteCurrency,
+  searchPortfolio,
+})(PortfolioList);

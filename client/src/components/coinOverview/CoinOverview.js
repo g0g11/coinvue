@@ -1,13 +1,11 @@
 import React from 'react';
 import { Container } from 'semantic-ui-react';
 
-import CoinOverviewList from './coinOverview/CoinOverviewList';
-import SearchBar from './SearchBar';
+import CoinOverviewList from './CoinOverviewList';
 
 const CoinOverview = () => {
   return (
     <Container className='content'>
-      <SearchBar />
       <CoinOverviewList />
     </Container>
   );

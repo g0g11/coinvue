@@ -27,3 +27,7 @@
   margin-top: 2.5em!important;
   margin-bottom: 1em!important;
 }
+
+svg {
+  margin: 2em 2em;
+}

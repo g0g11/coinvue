@@ -14,7 +14,6 @@ class ExchangeOverviewList extends Component {
   };
 
   renderExchanges() {
-    const { coins } = this.props;
     return this.props.coins.map(exchange => {
       return (
         <Table.Row key={ exchange._id }>

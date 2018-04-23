@@ -29,7 +29,6 @@ class CoinOverviewList extends Component {
   // TODO: Handle errors with Images
   // TODO: Display Statistics
   renderCurrencies() {
-    const { coins } = this.props;
     return this.props.coins.map(currency => {
       return (
         <Table.Row key={ currency._id }>

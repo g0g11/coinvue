@@ -1,20 +1,8 @@
+import _ from 'lodash';
 import React from 'react';
 import { Pie } from '@vx/shape';
 import { Group } from '@vx/group';
 import { LinearGradient } from '@vx/gradient';
-
-// const browsers = Object.keys(browserUsage[0])
-//   .filter(k => k !== 'date')
-//   .map(k => ({ label: k, usage: browserUsage[0][k] }));
-const browsers = [
-  { label: 'Google Chrome', usage: '48.00' },
-  { label: 'Firefox', usage: '12.00' },
-  { label: 'Internet Explorer', usage: '5.00' },
-  { label: 'Opera', usage: '5.00' },
-  { label: 'Safari', usage: '10.00' },
-  { label: 'Beta', usage: '10.00' },
-  { label: 'Others', usage: '10.00' },
-];
 
 function Label({ x, y, children }) {
   return (
@@ -41,11 +29,25 @@ export default ({
                     right: 5,
                     bottom: 30,
                   },
+                  data,
                 }) => {
   if (width < 10) {
-    console.log('width kleiner als 10');
     return null;
-  };
+  }
+
+  const amountExchanges = _(data)
+    .map(data => ({
+      total: data.amount * data.currency.priceEUR,
+      exchange: data.exchange.name,
+    }))
+    .groupBy('exchange')
+    .map((exchange, name) => ({
+      exchange: name,
+      total: _.sumBy(exchange, 'total'),
+    }))
+    .value();
+
+  console.log('chartdata', amountExchanges);
 
   const radius = Math.min(width, height) / 2;
   return (
@@ -61,8 +63,8 @@ export default ({
       />
       <Group top={height / 2 - margin.top} left={width / 2}>
         <Pie
-          data={browsers}
-          pieValue={d => d.usage}
+          data={amountExchanges}
+          pieValue={d => d.total}
           outerRadius={radius - 20}
           innerRadius={radius - 130}
           fill="white"
@@ -73,7 +75,7 @@ export default ({
             const [x, y] = centroid;
             const { startAngle, endAngle } = arc;
             if (endAngle - startAngle < .1) return null;
-            return <Label x={x} y={y}>{arc.data.label}</Label>;
+            return <Label x={x} y={y}>{arc.data.exchange}</Label>;
           }}
 
         />

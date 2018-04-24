@@ -4,8 +4,8 @@ import { fetchPortfolio } from '../../actions';
 import { Table, Image, Dimmer, Loader, Icon } from 'semantic-ui-react';
 import { deleteCurrency, searchPortfolio } from '../../actions';
 import SearchBar  from '../SearchBar';
-import PortfolioGraphByCoin from './PortfolioGraphByCoin';
-import PortfolioGraphByExchange from './PortfolioGraphByExchange';
+import PieChartByCoin from '../charts/PieChartByCoin';
+import PieChartByExchange from '../charts/PieChartByExchange';
 
 class PortfolioList extends Component {
   componentDidMount() {
@@ -60,8 +60,8 @@ class PortfolioList extends Component {
     return (
       <div>
         <SearchBar searchPortfolio={searchPortfolio} onSearch={ this.searchValue } />
-        <PortfolioGraphByCoin />
-        <PortfolioGraphByExchange />
+        <PieChartByCoin data={ this.props.coins } />
+        <PieChartByExchange data={ this.props.coins } />
         { this.props.isFetching || this.props.isEmpty ?
           <Dimmer active>
             <Loader />

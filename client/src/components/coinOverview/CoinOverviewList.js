@@ -26,7 +26,6 @@ class CoinOverviewList extends Component {
     this.props.searchCurrency(e);
   };
 
-  // TODO: Handle errors with Images
   // TODO: Display Statistics
   renderCurrencies() {
     return this.props.coins.map(currency => {
@@ -53,18 +52,18 @@ class CoinOverviewList extends Component {
             <Loader />
           </Dimmer>
           :
-        <Table singleLine>
-          <Table.Header>
-            <Table.Row>
-              <Table.HeaderCell>Logo</Table.HeaderCell>
-              <Table.HeaderCell>Currency</Table.HeaderCell>
-              <Table.HeaderCell>Market Price</Table.HeaderCell>
-              <Table.HeaderCell>Amount</Table.HeaderCell>
-              <Table.HeaderCell>Total</Table.HeaderCell>
-            </Table.Row>
-          </Table.Header>
-          <Table.Body>{ this.renderCurrencies() }</Table.Body>
-        </Table>
+          <Table singleLine>
+            <Table.Header>
+              <Table.Row>
+                <Table.HeaderCell>Logo</Table.HeaderCell>
+                <Table.HeaderCell>Currency</Table.HeaderCell>
+                <Table.HeaderCell>Market Price</Table.HeaderCell>
+                <Table.HeaderCell>Amount</Table.HeaderCell>
+                <Table.HeaderCell>Total</Table.HeaderCell>
+              </Table.Row>
+            </Table.Header>
+            <Table.Body>{ this.renderCurrencies() }</Table.Body>
+          </Table>
         }
       </div>
     );

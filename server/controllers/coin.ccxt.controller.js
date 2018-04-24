@@ -24,6 +24,7 @@ const fetchBalance = async (apiKey, apiSecret, userId) => {
         try {
           const exchangeId = await Exchange.findOne({ name: 'Binance' });
           const currencyId = await Coin.findOne({ shortName: coin[0] });
+          // TODO: Handle error when no coins in DB
           const searchCoin = await User.findOne({ _wallet:  { $elemMatch: { currency: currencyId._id, exchange: exchangeId } } });
           if (!searchCoin) {
             const addCoin = await User.findByIdAndUpdate(

@@ -77,3 +77,4 @@ export const searchCurrency = (value) => async dispatch => {
 export const searchExchange = (value) => async dispatch => {
   dispatch({ type: SEARCH_EXCHANGE, value });
 };
+

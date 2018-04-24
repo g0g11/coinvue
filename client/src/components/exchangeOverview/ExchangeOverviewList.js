@@ -55,7 +55,7 @@ function mapStateToProps(state) {
     isEmpty: true,
     exchanges: [],
     value: '',
-  }
+  };
   return {
     exchanges,
     isFetching,

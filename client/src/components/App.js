@@ -10,6 +10,7 @@ import ExchangeOverview from './exchangeOverview/ExchangeOverview';
 import NewApiForm from './portfolio/NewApiForm';
 import NewCurrencyForm from './portfolio/NewCurrencyForm';
 import ModalDialog from './modals/ModalDialog';
+import LoginForm from './LoginForm';
 
 class App extends Component {
   componentDidMount() {
@@ -21,6 +22,7 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <NavigationBar />
+          <Route exact path='/' component={ LoginForm } />
           <Route exact path='/dashboard' component={ Dashboard } />
           <Route exact path='/overview' component={ CoinOverview } />
           <Route exact path='/exchanges' component={ ExchangeOverview } />

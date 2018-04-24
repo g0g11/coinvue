@@ -3,6 +3,8 @@ const authGeneralController = require('../controllers/auth.general.controller');
 const coinCryptoCompareController = require('../controllers/coin.cryptocompare.controller');
 const coinController = require('../controllers/coin.controller');
 const coinCcxtController = require('../controllers/coin.ccxt.controller');
+const exchangeController = require('../controllers/exchanges.controller');
+const path = require('path');
 
 const passport = require('passport');
 
@@ -24,13 +26,18 @@ module.exports = (app) => {
   // cron for fetching all crypto currencies
   app.get('/api/cron/currency/all', coinCryptoCompareController.fetchAll);
   app.get('/api/cron/currency/prices', coinCryptoCompareController.fetchPrices);
-  // app.get('/api/')
 
   // cron for fetching all exchanges
   app.get('/api/cron/exchanges/all', coinCryptoCompareController.exchangeList);
 
+  // add exchange / wallets to fetch automatically
+  app.get('/api/cron/exchanges/balanceBinance', coinCcxtController.getBalance);
+
   // fetch all coins from own database
   app.get('/api/currency/all', coinController.listAll);
+
+  // fetch all exchanges
+  app.get('/api/exchanges/all', exchangeController.listAll);
 
   // list my coin portfolio
   app.get('/api/wallet/all', coinController.listMyCoins);
@@ -42,8 +49,10 @@ module.exports = (app) => {
   app.post('/api/wallet/api', coinController.addApi);
 
   // delete coin from portfolio
-  app.delete('/api/wallet/remove', coinController.deleteCoin);
+  app.delete('/api/wallet/remove/:id', coinController.deleteCoin);
 
-  // add exchange / wallets to fetch automatically
-  app.get('/api/wallet/getBalance', coinCcxtController.getBalance);
+
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../../client/public/index.html'));
+  });
 };

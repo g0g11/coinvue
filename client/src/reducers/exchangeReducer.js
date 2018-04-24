@@ -13,7 +13,7 @@ export default function(state = {
   switch (action.type) {
     case FETCH_EXCHANGES:
       return Object.assign({}, state, {
-        isFetching: false,
+        isFetching: true,
         isEmpty: false,
       });
     case RECEIVE_EXCHANGES:

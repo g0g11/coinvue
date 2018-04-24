@@ -15,7 +15,7 @@ const userSchema = new Schema({
       amount: Number,
       currency: { type: Schema.Types.ObjectId, ref: 'coins' },
       exchange: { type: Schema.Types.ObjectId, ref: 'exchanges' },
-      _id: false,
+      // _id: false,
     },
   ],
   _apiExchange: [

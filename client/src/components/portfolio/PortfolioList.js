@@ -56,7 +56,6 @@ class PortfolioList extends Component {
   }
 
   render() {
-    console.log(this.props);
     return (
       <div>
         <SearchBar searchPortfolio={searchPortfolio} onSearch={ this.searchValue } />

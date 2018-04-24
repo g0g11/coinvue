@@ -47,8 +47,6 @@ export default ({
     }))
     .value();
 
-  console.log('chartdata', amountExchanges);
-
   const radius = Math.min(width, height) / 2;
   return (
     <svg width={width} height={height}>

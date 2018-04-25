@@ -11,6 +11,7 @@ import NewApiForm from './portfolio/NewApiForm';
 import NewCurrencyForm from './portfolio/NewCurrencyForm';
 import ModalDialog from './modals/ModalDialog';
 import LoginForm from './LoginForm';
+import PriceHistory from './charts/PriceHistory';
 
 class App extends Component {
   componentDidMount() {
@@ -28,6 +29,7 @@ class App extends Component {
           <Route exact path='/exchanges' component={ ExchangeOverview } />
           <Route path='/add-api' component={ NewApiForm } />
           <Route path='/add-currency' component={ NewCurrencyForm } />
+          <Route path='/currency/:id' component={ PriceHistory } />
           <Route path='/success' component={ ModalDialog } />
         </div>
       </BrowserRouter>

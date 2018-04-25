@@ -2,11 +2,23 @@
 # yarn lockfile v1
 
 
-"@vx/curve@0.0.153":
+"@vx/bounds@0.0.153":
+  version "0.0.153"
+  resolved "https://registry.yarnpkg.com/@vx/bounds/-/bounds-0.0.153.tgz#2fc2118fdd3dbb1a3fb897dceabab3d5eb617617"
+  dependencies:
+    prop-types "^15.5.10"
+
+"@vx/curve@0.0.153", "@vx/curve@^0.0.153":
   version "0.0.153"
   resolved "https://registry.yarnpkg.com/@vx/curve/-/curve-0.0.153.tgz#6829c3454f9ec16b7e6925aecbad5a1e3c8b3169"
   dependencies:
     d3-shape "^1.0.6"
+
+"@vx/event@^0.0.153":
+  version "0.0.153"
+  resolved "https://registry.yarnpkg.com/@vx/event/-/event-0.0.153.tgz#80fccaacc7481c51768db8f6d95acc7ede3c0861"
+  dependencies:
+    "@vx/point" "0.0.153"
 
 "@vx/gradient@^0.0.153":
   version "0.0.153"
@@ -47,6 +59,14 @@
     classnames "^2.2.5"
     d3-path "^1.0.5"
     d3-shape "^1.2.0"
+    prop-types "^15.5.10"
+
+"@vx/tooltip@^0.0.160":
+  version "0.0.160"
+  resolved "https://registry.yarnpkg.com/@vx/tooltip/-/tooltip-0.0.160.tgz#f5a9176d8aafaeed0123b93fe68d60d4f7291048"
+  dependencies:
+    "@vx/bounds" "0.0.153"
+    classnames "^2.2.5"
     prop-types "^15.5.10"
 
 abab@^1.0.3:
@@ -1919,7 +1939,7 @@ currently-unhandled@^0.4.1:
   dependencies:
     array-find-index "^1.0.1"
 
-d3-array@^1.2.0:
+d3-array@^1.2.0, d3-array@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/d3-array/-/d3-array-1.2.1.tgz#d1ca33de2f6ac31efadb8e050a021d7e2396d5dc"
 
@@ -1967,7 +1987,7 @@ d3-shape@^1.0.6, d3-shape@^1.2.0:
   dependencies:
     d3-path "1"
 
-d3-time-format@2:
+d3-time-format@2, d3-time-format@^2.1.1:
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/d3-time-format/-/d3-time-format-2.1.1.tgz#85b7cdfbc9ffca187f14d3c456ffda268081bb31"
   dependencies:

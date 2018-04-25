@@ -9,3 +9,4 @@ export const DELETE_CURRENCY = 'delete_currency';
 export const SEARCH_PORTFOLIO = 'search_portfolio';
 export const SEARCH_CURRENCY = 'search_currency';
 export const SEARCH_EXCHANGE = 'search_exchange';
+export const FETCH_CURRENCY = 'fetch_currency';

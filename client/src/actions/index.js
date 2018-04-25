@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-import { FETCH_CURRENCIES,
+import {
+  FETCH_CURRENCIES,
   FETCH_PORTFOLIO,
   FETCH_USER,
   FETCH_EXCHANGES,
@@ -11,7 +12,9 @@ import { FETCH_CURRENCIES,
   SEARCH_PORTFOLIO,
   SEARCH_CURRENCY,
   SEARCH_EXCHANGE,
+  FETCH_CURRENCY,
 } from './types';
+import moment from 'moment/moment';
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/auth/user');
@@ -37,6 +40,33 @@ export const fetchCurrencies = () => dispatch => {
       type: RECEIVE_CURRENCIES,
       payload: res.data,
     }));
+};
+
+export const fetchCurrency = (id) => async dispatch => {
+  const res = await axios.get(`/api/currency/${id}`);
+  const history = await axios.get(`https://min-api.cryptocompare.com/data/histoday?fsym=${res.data[0].shortName}&tsym=EUR&limit=50`);
+  console.log('history', history);
+  const getData = () => {
+    const sortedData = [];
+    let count = 0;
+    for (let date in history.data.Data) {
+      sortedData.push({
+        d: moment(history.data.Data.time).format('MMM DD'),
+        p: history.data.Data[date].high.toLocaleString('us-EN', { style: 'currency', currency: 'EUR' }),
+        x: count, //previous days
+        y: history.data.Data[date].high, // numerical price
+      });
+      count++;
+    }
+
+    return sortedData;
+  };
+
+  const result = await getData();
+  dispatch({
+    type: FETCH_CURRENCY,
+    payload: result,
+  });
 };
 
 export const deleteCurrency = (id) => dispatch => {

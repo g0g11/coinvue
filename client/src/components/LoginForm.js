@@ -1,5 +1,5 @@
-import React from 'react'
-import { Button, Container, Icon, Header, Segment } from 'semantic-ui-react'
+import React from 'react';
+import { Button, Container, Icon, Header, Segment } from 'semantic-ui-react';
 
 const LoginForm = () => (
   <Segment inverted textAlign='center' style={{ minHeight: 700, padding: '1em 0em' }} vertical>
@@ -34,6 +34,6 @@ const LoginForm = () => (
     </a>
   </Container>
   </Segment>
-)
+);
 
-export default LoginForm
+export default LoginForm;

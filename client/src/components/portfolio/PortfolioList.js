@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPortfolio } from '../../actions';
-import { Table, Image, Dimmer, Loader, Icon } from 'semantic-ui-react';
+import { Table, Image, Dimmer, Loader, Icon, Button } from 'semantic-ui-react';
 import { deleteCurrency, searchPortfolio } from '../../actions';
 import SearchBar  from '../SearchBar';
+import { Link } from 'react-router-dom';
 import PieChartByCoin from '../charts/PieChartByCoin';
 import PieChartByExchange from '../charts/PieChartByExchange';
 
@@ -29,6 +30,11 @@ class PortfolioList extends Component {
     this.props.deleteCurrency(id);
   }
 
+  showPriceHistory = (id) => {
+    console.log(this.props);
+    this.props.history.push('/currency/:id');
+  };
+
   searchValue = (e) => {
     this.props.searchPortfolio(e);
   };
@@ -47,9 +53,21 @@ class PortfolioList extends Component {
           <Table.Cell>{ portfolio.amount }</Table.Cell>
           <Table.Cell positive>{ portfolio.amount * portfolio.currency.priceEUR } EUR</Table.Cell>
           <Table.Cell>{ portfolio.exchange.name }</Table.Cell>
-          <Table.Cell><Icon link
-            onClick={ this.deleteCoin.bind(this, portfolio._id) }
-            name='delete' /></Table.Cell>
+          <Table.Cell>
+            <Button
+              as={ Link }
+              to={ `/currency/${portfolio.currency._id}` }>
+              <Icon
+                link
+                name='line chart' />
+            </Button>
+          </Table.Cell>
+          <Table.Cell>
+            <Icon link
+              onClick={ this.deleteCoin.bind(this, portfolio._id) }
+              name='delete'
+            />
+          </Table.Cell>
         </Table.Row>
       );
     });
@@ -75,6 +93,7 @@ class PortfolioList extends Component {
               <Table.HeaderCell>Amount</Table.HeaderCell>
               <Table.HeaderCell>Total</Table.HeaderCell>
               <Table.HeaderCell>Exchange</Table.HeaderCell>
+              <Table.HeaderCell>History</Table.HeaderCell>
               <Table.HeaderCell>Delete</Table.HeaderCell>
             </Table.Row>
           </Table.Header>

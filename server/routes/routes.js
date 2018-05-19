@@ -36,6 +36,9 @@ module.exports = (app) => {
   // fetch all coins from own database
   app.get('/api/currency/all', coinController.listAll);
 
+  // fetch one coin from request
+  app.get('/api/currency/:id', coinController.listCurrency);
+
   // fetch all exchanges
   app.get('/api/exchanges/all', exchangeController.listAll);
 

@@ -16,6 +16,18 @@ module.exports.listAll = async (req, res) => {
   }
 };
 
+// Public: List specific Coin
+module.exports.listCurrency = async (req, res) => {
+  try {
+    const coins = await Coin.find({ _id: req.params.id });
+    res.send(coins);
+    res.status(200);
+  } catch (err) {
+    console.error(err);
+    res.status(400);
+  }
+};
+
 // Private: Add a new Coin to Portfolio
 module.exports.addCoin = async (req, res) => {
   try {

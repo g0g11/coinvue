@@ -1,5 +1,5 @@
-<div align="center">
-    ![logo coinvue](https://github.com/g0g11/coinvue/blob/master/client/src/resources/logo.png?raw=true)
+<div align="center" style="background-color: black;">
+    <img src="https://github.com/g0g11/coinvue/blob/master/client/src/resources/logo.png"></img>
 </div>
 
 ## About
@@ -26,8 +26,8 @@ yarn start
 
 ## Screenshots
 <div align="center">
-    ![logo coinvue](https://github.com/g0g11/coinvue/blob/master/client/src/resources/screens/portfolio_overview.png?raw=true)
-    ![logo coinvue](https://github.com/g0g11/coinvue/blob/master/client/src/resources/screens/currency_chart.png?raw=true)
+    <img src="https://github.com/g0g11/coinvue/blob/master/client/src/resources/screens/portfolio_overview.png"></img>
+    <img src="https://github.com/g0g11/coinvue/blob/master/client/src/resources/screens/currency_chart.png"></img>
 </div>
 
 ## Tech Stack

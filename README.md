@@ -1,5 +1,5 @@
 <div align="center" style="color: black">
-    <img src="https://github.com/g0g11/coinvue/blob/master/client/src/resources/logo.png"></img>
+    <img src="https://github.com/g0g11/coinvue/blob/master/client/src/resources/logo-black.png"></img>
 </div>
 
 ## About
